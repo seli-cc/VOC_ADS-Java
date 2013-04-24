@@ -8,7 +8,7 @@ public class StudentKeys {
 		public SurNameKey(String surName) {
 			this.surName = surName;
 		}
-		public boolean equals(Object data) {
+		public boolean matches(Object data) {
 			return surName == ((Student) data).surName;
 		}
 	}
@@ -18,7 +18,7 @@ public class StudentKeys {
 		public MatrNrKey(String matrNr) {
 			this.matrNr = matrNr;
 		}
-		public boolean equals(Object data) {
+		public boolean matches(Object data) {
 			return matrNr == ((Student) data).matrNr;
 		}
 	}

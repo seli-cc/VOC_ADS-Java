@@ -84,7 +84,7 @@ public class BTree {
 		Object data = null; // a data set based on the depth-first pre-order traversal
 		
 		if (current != null) { // We have not found the data set by reaching the bottom
-			if (key.equals(current.data)) { // If the current node stores the requested
+			if (key.matches(current.data)) { // If the current node stores the requested
 				data = current.data;        // data set remember its reference
 			} else { // If the current node didn't store the requested data set
 				data = depthFirstPreOrderSearch(current.left, key); // search the left
@@ -105,7 +105,7 @@ public class BTree {
 		
 		if (current != null) { // We have not found the data set by reaching the bottom
 			data = depthFirstInOrderSearch(current.left, key); // Search at the left side
-			if (data == null && key.equals(current.data)) { // Not found but current stores
+			if (data == null && key.matches(current.data)) { // Not found but current stores
 				data = current.data; // the requested data set, store its reference
 			} else if (data == null) { // Still not found - search at the right
 					data = depthFirstInOrderSearch(current.right, key);
@@ -125,7 +125,7 @@ public class BTree {
 			data = depthFirstPostOrderSearch(current.left, key); // Search at the left side
 			if (data == null) { // Not found? Than search also on the
 				data = depthFirstPostOrderSearch(current.right, key); // right side
-				if (data == null && key.equals(current.data)) { // Not found on the left
+				if (data == null && key.matches(current.data)) { // Not found on the left
 					data = current.data; // side but in current - remember the reference.
 				}
 			}
@@ -145,7 +145,7 @@ public class BTree {
 		  										   // Proceed while the queue is not
 		while (!queue.empty() && data == null) {   // empty and the data set was not found
 			Node current = (Node) queue.dequeue(); // Fetch a node from the queue
-			if (key.equals(current.data)) {        // Is this the node of the requested
+			if (key.matches(current.data)) {        // Is this the node of the requested
 				data = current.data;               // data set? Yes - store its reference
 			} else {                               // No - enqueue the left and right
 				if (current.left != null) {        // child-nodes, but only if they exist 

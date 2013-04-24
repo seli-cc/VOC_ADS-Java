@@ -20,7 +20,7 @@ public class ListMap {
             this.data = data;
         }
         
-        public boolean equals(Object data) {
+        public boolean matches(Object data) {
             Object key = ((Map) data).key;
             return key.equals(this.data);
         }

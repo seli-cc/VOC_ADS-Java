@@ -9,7 +9,7 @@ public class IntegerKey implements IKey {
 		this.data = data;
 	}
 	
-	public boolean equals(Object data) { // Return true if the key matches a given object.
+	public boolean matches(Object data) { // Return true if the key matches a given object.
         System.out.println(data);
 	    if (data instanceof Integer) {
             System.out.println("Integer");

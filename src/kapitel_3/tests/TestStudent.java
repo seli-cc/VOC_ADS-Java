@@ -9,14 +9,14 @@ public class TestStudent {
 		
 		IKey surNameKey = new StudentKeys.SurNameKey("Einstein");
 		
-		if (surNameKey.equals(s1)) {
+		if (surNameKey.matches(s1)) {
 			System.out.println("Student s1 is Albert Einstein");
 			System.out.println(s1);
 		} else {
 			System.out.println("Student s1 is not Albert Einstein");
 		}
 		
-		if (surNameKey.equals(s2)) {
+		if (surNameKey.matches(s2)) {
 			System.out.println("Student s2 is Albert Einstein");
 			System.out.println(s2);
 		} else {
@@ -25,13 +25,13 @@ public class TestStudent {
 		
 		IKey matrNrKey = new StudentKeys.MatrNrKey("MTD0100001");
 		
-		if (matrNrKey.equals(s1)) {
+		if (matrNrKey.matches(s1)) {
 			System.out.println("Student s1 has MatrNr MTD0100001:\nStudent: " + s1);
 		} else {
 			System.out.println("Student s1 didn't have MatrNr MTD0100001");
 		}
 		
-		if (matrNrKey.equals(s2)) {
+		if (matrNrKey.matches(s2)) {
 			System.out.println("Student s2 has MatrNr MTD0100001:\nStudent: " + s2);
 		} else {
 			System.out.println("Student s2 didn't have MatrNr MTD0100001");

@@ -28,7 +28,7 @@ public class MySList extends SList {
 	protected Node searchForNode(IKey key) {
 		Node current = head;
 		
-		while(current != null && !key.equals(current.data)) {
+		while(current != null && !key.matches(current.data)) {
 			current = current.next;
 		}
 		
@@ -50,7 +50,7 @@ public class MySList extends SList {
 		
 		Node current = head;
 		while(current != null) {
-			if (key.equals(current.data)) {
+			if (key.matches(current.data)) {
 				allList.prepend(current.data);
 			}
 		}

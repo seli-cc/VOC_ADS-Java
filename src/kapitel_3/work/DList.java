@@ -36,7 +36,7 @@ public class DList {
 	public Object forwardSearch(IKey key) { // Forward search for an object matching
 		Node current = head;               // a given key.
 		
-		while(current != null && !key.equals(current.data)) { // Iterate for all nodes 
+		while(current != null && !key.matches(current.data)) { // Iterate for all nodes 
 									// in the list but interrupt if the object is found.
 			current = current.next; // Not found! Jump to the next node.
 		}   						// If found return the object otherwise return null.
@@ -46,7 +46,7 @@ public class DList {
 	public Object reverseSearch(IKey key) { // Reverse search for an object matching
 		Node current = tail;               // a given key.
 		
-		while(current != null && !key.equals(current.data)) { // Iterate for all nodes 
+		while(current != null && !key.matches(current.data)) { // Iterate for all nodes 
 									// in the list but interrupt if the object is found.
 			current = current.prev; // Not found! Jump to the previous node.
 		}							// If found return the object otherwise return null.		

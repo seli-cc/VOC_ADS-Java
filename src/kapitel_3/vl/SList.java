@@ -20,7 +20,7 @@ public class SList {
 	public Object search(IKey key) { // Search for an object matching a given key.
 		Node current = head;        // current references one node at a time.
 		
-		while(current != null && !key.equals(current.data)) {  // Iterate for all nodes 
+		while(current != null && !key.matches(current.data)) {  // Iterate for all nodes 
 			  						// in the list but interrupt if the object is found.
 			current = current.next; // Not found! Jump to the next node.
 		}	

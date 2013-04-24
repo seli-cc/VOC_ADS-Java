@@ -11,7 +11,7 @@ public class TelephonebookEntryKey implements IKey {
 		this.surName = surName;
 	}
 	
-	public boolean equals(Object data) {
+	public boolean matches(Object data) {
 		TelephonebookEntry te = (TelephonebookEntry) data;
 		return te.name().equals(name) && te.surName().equals(surName);
 	}

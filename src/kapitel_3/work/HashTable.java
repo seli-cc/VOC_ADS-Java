@@ -33,7 +33,7 @@ public class HashTable {
             this.key = key;
         }
 
-        public boolean equals(Object data) {
+        public boolean matches(Object data) {
             return key.equals(((Tuple) data).key);
         }
     }

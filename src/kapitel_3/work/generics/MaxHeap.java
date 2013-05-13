@@ -1,9 +1,7 @@
-package kapitel_3.work;
+package kapitel_3.work.generics;
 
-import kapitel_3.vl.IComparator;
-
-public class MaxHeap extends Heap {
-	public MaxHeap(IComparator comparator) {
+public class MaxHeap<T> extends Heap<T> {
+	public MaxHeap(IComparator<T> comparator) {
 		super(comparator);
 	}
 

@@ -1,5 +1,7 @@
 package kapitel_3.work;
 
+import kapitel_3.vl.IKey;
+
 public class ListMap {
     protected SList list = new SList();
     

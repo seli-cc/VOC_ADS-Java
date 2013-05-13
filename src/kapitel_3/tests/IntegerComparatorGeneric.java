@@ -1,10 +1,10 @@
 package kapitel_3.tests;
 
-import kapitel_3.vl.IComparator;
-import kapitel_3.vl.IKey;
+import kapitel_3.work.generics.IComparator;
+import kapitel_3.work.generics.IKey;
 
-public class IntegerComparator implements IComparator {
-    public int compare(Object data1, Object data2) {
+public class IntegerComparatorGeneric implements IComparator<Integer> {
+    public int compare(Integer data1, Integer data2) {
         int int1 = (Integer) data1;
         int int2 = (Integer) data2;
         
@@ -17,9 +17,9 @@ public class IntegerComparator implements IComparator {
         }
     }
 
-    public int compare(Object data, IKey key) {
+    public int compare(Integer data, IKey<Integer> key) {
         int int1 = (Integer) data;
-        int int2 = (Integer) ((IntegerKey) key).data;
+        int int2 = (Integer) ((IntegerKeyGeneric) key).data;
         
         if (int1 < int2) {
             return -1;

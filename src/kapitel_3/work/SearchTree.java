@@ -1,5 +1,9 @@
 package kapitel_3.work;
-public class SearchTree extends BTree {
+
+import kapitel_3.vl.IComparator;
+import kapitel_3.vl.IKey;
+
+public class SearchTree extends Tree {
 	protected IComparator comparator = null; // A comparator used to compare data sets
 	
 	public SearchTree(IComparator comparator) { // Create a SearchTree which uses

@@ -1,25 +1,22 @@
-package kapitel_3.work;
+package kapitel_3.work.generics;
 
-import kapitel_3.vl.IComparator;
-import kapitel_3.vl.IKey;
-
-public abstract class Heap extends Tree {
-	protected IComparator comparator = null;
+public abstract class Heap<T> extends Tree<T> {
+	protected IComparator<T> comparator = null;
 	
 	protected abstract int comparatorSign();
 	
 	protected int cs = comparatorSign();
 	
-	private Node lastNode = null;
+	private Node<T> lastNode = null;
 	
-	public Heap(IComparator comparator) {
+	public Heap(IComparator<T> comparator) {
 		this.comparator = comparator;
 	}
 	
-	private void upHeap(Node node) {
+	private void upHeap(Node<T> node) {
 		if (node.parent != null) {
 			if (cs * comparator.compare(node.parent.data, node.data) == +1) {
-				Object tmpData = node.parent.data;
+				T tmpData = node.parent.data;
 				node.parent.data = node.data;
 				node.data = tmpData;
 				upHeap(node.parent);
@@ -27,8 +24,8 @@ public abstract class Heap extends Tree {
 		}
 	}
 
-	private Node findNextParent() {
-		Node nextParent = lastNode;
+	private Node<T> findNextParent() {
+		Node<T> nextParent = lastNode;
 		
 		if (lastNode != null) {
 			if (lastNode.isLeftChild()) {
@@ -50,8 +47,8 @@ public abstract class Heap extends Tree {
 		return nextParent;
 	}
 	
-	protected void insert(Node newNode) {
-		Node nextParent = findNextParent();
+	protected void insert(Node<T> newNode) {
+		Node<T> nextParent = findNextParent();
 		
 		if (nextParent == null) {
 			root = newNode;
@@ -67,14 +64,14 @@ public abstract class Heap extends Tree {
 		upHeap(lastNode);
 	}
 	
-	public void insert(Object data) {
-		Node newNode = new Node(null, data, null);
+	public void insert(T data) {
+		Node<T> newNode = new Node<T>(null, data, null);
 		
 		insert(newNode);
 	}
 
-	private void downHeap(Node node) {
-		Node exchangeChild = node.left;
+	private void downHeap(Node<T> node) {
+		Node<T> exchangeChild = node.left;
 		
 		if (exchangeChild == null || node.right != null 
 				&& cs * comparator.compare(exchangeChild.data, node.right.data) 
@@ -88,8 +85,8 @@ public abstract class Heap extends Tree {
 		}
 	}
 	
-	private Node findLastButOne() {
-		Node lastButOne = null;
+	private Node<T> findLastButOne() {
+		Node<T> lastButOne = null;
 		
 		if (lastNode.isRightChild()) {
 			lastButOne = lastNode.parent.left;
@@ -109,12 +106,12 @@ public abstract class Heap extends Tree {
 		return lastButOne;
 	}
 	
-	protected void remove(Node toRemove) {
+	protected void remove(Node<T> toRemove) {
 		if (toRemove != null) {
-			Node lastButOne = findLastButOne();
+			Node<T> lastButOne = findLastButOne();
 			
 			if (lastButOne != null) {
-				Object data = toRemove.data;
+				T data = toRemove.data;
 				toRemove.data = lastNode.data;
 				if (cs * comparator.compare(data, toRemove.data) == +1) {
 					upHeap(toRemove);
@@ -128,34 +125,34 @@ public abstract class Heap extends Tree {
 		}
 	}
 	
-	public boolean remove(IKey key) {
-		Node toRemove = heapSearch(root, key);
+	public boolean remove(IKey<T> key) {
+		Node<T> toRemove = heapSearch(root, key);
 		
 		remove(toRemove);
 
 		return toRemove != null;
 	}
 	
-	public boolean remove(Object data) {
-		Node toRemove = heapSearch(root, data);
+	public boolean remove(T data) {
+		Node<T> toRemove = heapSearch(root, data);
 		
 		remove(toRemove);
 		
 		return toRemove != null;
 	}
 	
-	public Object extractRoot() {
-		Node toRemove = root;
+	public T extractRoot() {
+		Node<T> toRemove = root;
 		
-		Object data = (toRemove != null) ? toRemove.data : null;
+		T data = (toRemove != null) ? toRemove.data : null;
 
 		remove(toRemove);
 		
 		return data;
 	}
 	
-	protected Node heapSearch(Node currentRoot, IKey key) {
-		Node found = null;
+	protected Node<T> heapSearch(Node<T> currentRoot, IKey<T> key) {
+		Node<T> found = null;
 		
 		if (currentRoot != null) {
 			switch(cs * comparator.compare(currentRoot.data, key)) {
@@ -175,8 +172,8 @@ public abstract class Heap extends Tree {
 		return found;
 	}
 	
-	protected Node heapSearch(Node currentRoot, Object data) {
-		Node found = null;
+	protected Node<T> heapSearch(Node<T> currentRoot, T data) {
+		Node<T> found = null;
 		
 		if (currentRoot != null) {
 			switch(cs * comparator.compare(currentRoot.data, data)) {
@@ -194,12 +191,12 @@ public abstract class Heap extends Tree {
 		return found;
 	}
 	
-	public Object search(IKey key) {
-		Node found = heapSearch(root, key);
+	public T search(IKey<T> key) {
+		Node<T> found = heapSearch(root, key);
 		return (found != null) ? found.data : null;
 	}
 	
-	protected boolean isHeap(Node current) {
+	protected boolean isHeap(Node<T> current) {
 		boolean answer = true;
 		
 		if (current != null) {

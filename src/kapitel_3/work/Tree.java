@@ -1,6 +1,10 @@
 package kapitel_3.work;
 
-public class BTree {
+import kapitel_3.vl.IFIterator;
+import kapitel_3.vl.IKey;
+import kapitel_3.vl.IWorker;
+
+public class Tree {
 	protected Node root = null;	// The root of the tree
 	
 	protected static class Node {
@@ -15,30 +19,30 @@ public class BTree {
 			this.right = right;					          // right child-node
 		}
 		
-		boolean isLeftChild() {
+		public boolean isLeftChild() {
 			return parent != null && parent.left == this;
 		}
 		
-		boolean isRightChild() {
+		public boolean isRightChild() {
 			return parent != null && parent.right == this;
 		}
 		
-		boolean isRoot() {
+		public boolean isRoot() {
 		    return parent == null;
 		}
 		
-		boolean isLeaf() {
+		public boolean isLeaf() {
 		    return left == null && right == null;
 		}
 		
-		boolean isHalfLeaf() {
+		public boolean isHalfLeaf() {
 		    return left == null && right != null || left != null && right == null;
 		}
 	}
 	
 	private static void depthFirstPreOrder(Node current, IWorker worker) { // Traverse
 		if (current != null) {						   // the tree pre-order depth-first
-            worker.work(current.data);                // Process the data set
+            worker.work(current.data);                 // Process the data set
 			depthFirstPreOrder(current.left, worker);  // Recursive call with left child
 			depthFirstPreOrder(current.right, worker); // Recursive call with right child
 		}
@@ -76,7 +80,7 @@ public class BTree {
 		Queue queue = new Queue();			       // The helper-queue
 		
 		if (root != null) {
-			queue.enqueue(root);					   // Enqueue the root of the tree
+			queue.enqueue(root);			       // Enqueue the root of the tree
 		}
 		while (!queue.empty()) {                   // Iterate as long as queue is not empty
 			Node current = (Node) queue.dequeue(); // Fetch a node from the queue

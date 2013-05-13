@@ -1,16 +1,16 @@
 package kapitel_3.tests;
 
-import kapitel_3.work.AVLTree;
-import kapitel_3.work.PGFTree;
-import kapitel_3.vl.IComparator;
-import kapitel_3.vl.IKey;
+import kapitel_3.work.generics.AVLTree;
+import kapitel_3.work.generics.PGFTree;
+import kapitel_3.work.generics.IComparator;
+import kapitel_3.work.generics.IKey;
 
-public class TestAVLTree {
+public class TestGenericAVLTree {
 	public static void main(String[] args) {
-		IComparator pgfComparator = PGFTree.comparator(new IntegerComparator());
+        IComparator<PGFTree<Integer>.PGFProxy> pgfComparator = PGFTree.comparator(new IntegerComparatorGeneric());
 		
-		AVLTree avlTree = new AVLTree(pgfComparator);
-		PGFTree pgfTree = new PGFTree(avlTree);
+		AVLTree<PGFTree<Integer>.PGFProxy> avlTree = new AVLTree<PGFTree<Integer>.PGFProxy>(pgfComparator);
+		PGFTree<Integer> pgfTree = new PGFTree<Integer>(avlTree);
 
 		final int MAX = 15;
 
@@ -21,10 +21,10 @@ public class TestAVLTree {
 			avlTree.insert(pgfTree.pgfProxy(i));
 		}
 		
-		IKey integerKey = new IntegerKey(6);
-		IKey key = PGFTree.key(integerKey);
+		IKey<Integer> integerKey = new IntegerKeyGeneric(6);
+		IKey<PGFTree<Integer>.PGFProxy> key = PGFTree.key(integerKey);
 		
-		Object proxy = avlTree.binarySearch(key);
+		PGFTree<Integer>.PGFProxy proxy = avlTree.binarySearch(key);
 		PGFTree.setNodeFormat(proxy, "[inserted node]");
 		PGFTree.setChildFormat(proxy, "[draw=red]");
 		

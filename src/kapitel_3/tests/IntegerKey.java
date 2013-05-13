@@ -10,14 +10,15 @@ public class IntegerKey implements IKey {
 	}
 	
 	public boolean matches(Object data) { // Return true if the key matches a given object.
-        System.out.println(data);
 	    if (data instanceof Integer) {
-            System.out.println("Integer");
 	        return this.data.intValue() == ((Integer) data).intValue();
 	    } else if (data instanceof IntegerKey) {
-	        System.out.println("IntegerKey: " + ((IntegerKey) data).data.intValue() + ", this Data: " + this.data.intValue());
 	        return this.data.intValue() == ((IntegerKey) data).data.intValue();
 	    }
 	    return false;
+	}
+	
+	public void setKeyValue(int i) {
+	    data = i;
 	}
 }

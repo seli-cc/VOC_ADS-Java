@@ -1,4 +1,10 @@
 package kapitel_3.work;
+
+import kapitel_3.vl.IBIterator;
+import kapitel_3.vl.IFIterator;
+import kapitel_3.vl.IKey;
+import kapitel_3.vl.IRIterator;
+
 public class DList {
 	protected Node head = null; // The head of the list.
 	protected Node tail = null; // The tail of the list.

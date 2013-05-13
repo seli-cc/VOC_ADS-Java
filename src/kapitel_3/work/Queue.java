@@ -1,4 +1,7 @@
 package kapitel_3.work;
+
+import kapitel_3.vl.IRIterator;
+
 public class Queue {
 	int size = 0;
 	DList list = new DList();

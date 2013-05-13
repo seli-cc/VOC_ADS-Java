@@ -1,9 +1,7 @@
-package kapitel_3.work;
+package kapitel_3.work.generics;
 
-import kapitel_3.vl.IComparator;
-
-public class MinHeap extends Heap {
-	public MinHeap(IComparator comparator) {
+public class MinHeap<T> extends Heap<T> {
+	public MinHeap(IComparator<T> comparator) {
 		super(comparator);
 	}
 

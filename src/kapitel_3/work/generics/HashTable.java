@@ -1,43 +1,40 @@
-package kapitel_3.work;
+package kapitel_3.work.generics;
 
-import kapitel_3.vl.IFIterator;
-import kapitel_3.vl.IKey;
-
-public class HashTable {
-	protected Bucket[] buckets = null;
+public class HashTable<T> {
+	protected Bucket<T>[] buckets = null;
 	protected int size = 0;
 	protected int maxLoad = 0;
 	protected int currentLoad = 0;
 	
-    protected static class Bucket {
-        private SList list;
+    protected static class Bucket<T> {
+        private SList<Tuple<T>> list;
         
         public Bucket() {
-            list = new SList();
+            list = new SList<Tuple<T>>();
         }
     }
     
-    protected static class Tuple {
+    protected static class Tuple<T> {
         public long hash;
         public String key;
-        public Object data;
+        public T data;
         
-        public Tuple(long hash, String key, Object data) {
+        public Tuple(long hash, String key, T data) {
             this.hash = hash;
             this.key = key;
             this.data = data;
         }
     }
     
-    protected static class TupleKey implements IKey {
+    protected static class TupleKey<T> implements IKey<Tuple<T>> {
         String key;
         
         public TupleKey(String key) {
             this.key = key;
         }
 
-        public boolean matches(Object data) {
-            return key.equals(((Tuple) data).key);
+        public boolean matches(Tuple<T> data) {
+            return key.equals(data.key);
         }
     }
 	
@@ -97,19 +94,20 @@ public class HashTable {
 		buckets = initBuckets(size);
 	}
 	
-	private static Bucket[] initBuckets(int size) {
-	    Bucket[] b = new Bucket[size];
+	private static <T> Bucket<T>[] initBuckets(int size) {
+	    @SuppressWarnings("unchecked")
+        Bucket<T>[] b = (Bucket<T>[]) new Object[size];
 	    
 		for (int i = 0; i < b.length; i++) {
-			b[i] = new Bucket();
+			b[i] = new Bucket<T>();
 		}
 		return b;
 	}
 	
-	public void insert(String key, Object data) {
+	public void insert(String key, T data) {
 		long hash = sdbm(key);
 		
-		buckets[(int) (hash & (size - 1))].list.prepend(new Tuple(hash, key, data));
+		buckets[(int) (hash & (size - 1))].list.prepend(new Tuple<T>(hash, key, data));
 		
 		currentLoad++;
 		if (currentLoad >= maxLoad) {
@@ -118,13 +116,13 @@ public class HashTable {
 	}
     
     public void resize() {
-        Bucket[] newBuckets = initBuckets(size << 1);
+        Bucket<T>[] newBuckets = initBuckets(size << 1);
         
         for (int i = 0; i < size; i++) {
-            SList list = buckets[i].list;
-            IFIterator it = list.iterator();
+            SList<Tuple<T>> list = buckets[i].list;
+            IFIterator<Tuple<T>> it = list.iterator();
             while(it.hasNext()) {
-                Tuple entry = (Tuple) it.next();
+                Tuple<T> entry = it.next();
                 newBuckets[(int) (entry.hash & ((size << 1) - 1))].list.prepend(entry);
             }
         }
@@ -135,11 +133,11 @@ public class HashTable {
 	
 	public Object get(String key) {
 		long hash = sdbm(key);
-		Bucket bucket = buckets[(int) (hash & (size -1 ))];
+		Bucket<T> bucket = buckets[(int) (hash & (size -1 ))];
 		
-		TupleKey k = new TupleKey(key);
+		TupleKey<T> k = new TupleKey<T>(key);
 		
-		Tuple entry = (Tuple) bucket.list.search(k);
+		Tuple<T> entry = bucket.list.search(k);
 		
 		Object ret = null;
 		if (entry != null) {
@@ -150,10 +148,10 @@ public class HashTable {
 	
 	public void remove(String key) {
         long hash = sdbm(key);
-        Bucket bucket = buckets[(int) (hash & (size -1 ))];
+        Bucket<T> bucket = buckets[(int) (hash & (size -1 ))];
 
-        TupleKey k = new TupleKey(key);
-        Tuple entry = (Tuple) bucket.list.search(k);
+        TupleKey<T> k = new TupleKey<T>(key);
+        Tuple<T> entry = bucket.list.search(k);
         
         bucket.list.remove(entry);
 	}

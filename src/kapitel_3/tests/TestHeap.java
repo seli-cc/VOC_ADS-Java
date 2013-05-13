@@ -1,7 +1,7 @@
 package kapitel_3.tests;
 
-import kapitel_3.vl.MaxHeap;
-import kapitel_3.vl.PrintTree;
+import kapitel_3.work.MaxHeap;
+import kapitel_3.work.PrintTree;
 
 public class TestHeap {
 	public static void main(String[] args) {

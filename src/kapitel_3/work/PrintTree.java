@@ -2,7 +2,7 @@ package kapitel_3.work;
 
 public class PrintTree {
     ListMap map = new ListMap();
-    BTree tree = null;
+    Tree tree = null;
 
     private class PGFFormat {
         String pathFormat;
@@ -55,7 +55,7 @@ public class PrintTree {
             + "        },\n"
             + "    };\n";
 
-    public PrintTree(BTree tree) {
+    public PrintTree(Tree tree) {
         this.tree = tree;
     }
 
@@ -63,7 +63,7 @@ public class PrintTree {
         map.insert(data, new PGFFormat(nodeFormat, pathFormat));
     }
 
-    protected String treeToPGF(BTree.Node currentRoot, String tabs) {
+    protected String treeToPGF(Tree.Node currentRoot, String tabs) {
         String pgfTree = "[missing]\n";
 
         if (currentRoot != null) {
@@ -86,7 +86,7 @@ public class PrintTree {
         return pgfTree;
     }
 
-    protected static String treeToQTree(BTree.Node currentRoot) {
+    protected static String treeToQTree(Tree.Node currentRoot) {
         String qTree = null;
 
         if (currentRoot != null) {

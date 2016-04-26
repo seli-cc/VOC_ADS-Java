@@ -21,6 +21,10 @@ public class TestGenericAVLTree {
         IntegerKeyGeneric integerKey = new IntegerKeyGeneric(0);
         IKey<PGFTree<Integer>.PGFProxy> key = PGFTree.key(integerKey);
         
+        long a = 1299;
+        float b = a;
+        
+        
         System.out.println(pgfTree.header());
 		for (int i = 0; i < MAX; i++) {
 		    int n = 0;

@@ -151,8 +151,8 @@ public class BTree {
 		return depthFirstPostOrderSearch(root, key);    // post-order search process
 	}
 	
-	public Object breadthFirstSearch(IKey key) {   // Search for a data set based on the
-		Object data = null;                        // breadth-first traversal
+	public Object breadthFirstSearch(IKey key) {      // Search for a data set based on the
+		Object data = null;                           // breadth-first traversal
         IQueue queue = Exercise.newInstance("Queue"); // The helper-queue
 		
 		if (root != null) {

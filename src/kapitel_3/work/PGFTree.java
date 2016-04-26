@@ -243,7 +243,7 @@ public class PGFTree {
                 pgfTree += tabs + "    child " + pgfLeftSubTree + "\n";
                 pgfTree += tabs + "    child " + pgfRightSubTree + "\n";
             } 
-            pgfTree += (edgeFromParentFormat != "" ? tabs + "    edge from parent " + edgeFromParentFormat + "\n" : "");
+            pgfTree += (!edgeFromParentFormat.equals("") ? tabs + "    edge from parent " + edgeFromParentFormat + "\n" : "");
             pgfTree += tabs + "}"; //\n";
         }
         

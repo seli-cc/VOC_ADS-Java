@@ -1,6 +1,7 @@
 package uebung_2.ue;
 
 import kapitel_3.vl.IKey;
+import kapitel_3.vl.ReferenceKey;
 
 public class SList extends kapitel_3.vl.SList {
 	protected Node searchForLastNode() {
@@ -32,6 +33,18 @@ public class SList extends kapitel_3.vl.SList {
 		}
 		
 		return previousNode != null;
+	}
+	
+	public boolean insert(Object prev, Object data) {
+	    ReferenceKey referenceKey = new ReferenceKey(prev);
+	    
+	    Node previousNode = search(head, referenceKey);
+	    
+	    if (previousNode != null) {
+	        previousNode.next = new Node(data, previousNode.next);
+	    }
+        
+        return previousNode != null;
 	}
 	
 	public SList searchAll(IKey key) {

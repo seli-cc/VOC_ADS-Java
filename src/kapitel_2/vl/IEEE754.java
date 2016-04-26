@@ -36,7 +36,7 @@ public class IEEE754 {
 	}
 	
 	public static void main(String[] args) {
-		double nPi = 3.14159265359;
+		double nPi = Math.PI;
 		System.out.println(convertToIEEE754(nPi));
 	}
 }

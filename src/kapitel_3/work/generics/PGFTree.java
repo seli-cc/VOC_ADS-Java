@@ -268,15 +268,15 @@ public class PGFTree<T> {
             String pgfLeftSubTree = treeToPGF(currentRoot.left, tabs + "    ");
             String pgfRightSubTree = treeToPGF(currentRoot.right, tabs + "    ");
             
-            pgfTree = (childFormat != "" ? childFormat + " " : "") + "{\n" + (subTreeFormat != "" ? tabs + "    " + subTreeFormat + "\n" : "")
-                            + tabs + "    node" + (nodeFormat != "" ? " " + nodeFormat : "") + " (" + currentRoot.data + ") {" + currentRoot.data + "}\n"
-                            + (childrenFormat != "" ? tabs + "    " + childrenFormat + "\n" : "");
+            pgfTree = (!childFormat.equals("") ? childFormat + " " : "") + "{\n" + (!subTreeFormat.equals("") ? tabs + "    " + subTreeFormat + "\n" : "")
+                            + tabs + "    node" + (!nodeFormat.equals("") ? " " + nodeFormat : "") + " (" + currentRoot.data + ") {" + currentRoot.data + "}\n"
+                            + (!childrenFormat.equals("") ? tabs + "    " + childrenFormat + "\n" : "");
             
             if (!pgfLeftSubTree.equals("[missing]") || !pgfRightSubTree.equals("[missing]")) {
                 pgfTree += tabs + "    child " + pgfLeftSubTree + "\n";
                 pgfTree += tabs + "    child " + pgfRightSubTree + "\n";
             } 
-            pgfTree += (edgeFromParentFormat != "" ? tabs + "    edge from parent " + edgeFromParentFormat + "\n" : "");
+            pgfTree += (!edgeFromParentFormat.equals("") ? tabs + "    edge from parent " + edgeFromParentFormat + "\n" : "");
             pgfTree += tabs + "}"; //\n";
         }
         

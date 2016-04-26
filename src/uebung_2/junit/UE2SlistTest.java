@@ -7,9 +7,9 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import uebung_2.tests.TelephonebookEntry;
-import uebung_2.tests.TelephonebookEntryKey;
 import uebung_2.ue.SList;
+import uebung_2.ue.TelephonebookEntry;
+import uebung_2.ue.TelephonebookEntryKey;
 import kapitel_3.vl.IFIterator;
 import kapitel_3.tests.Student;
 import kapitel_3.tests.StudentKeys;

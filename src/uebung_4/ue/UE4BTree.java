@@ -1,6 +1,5 @@
 package uebung_4.ue;
 
-import kapitel_3.vl.IKey;
 import kapitel_3.vl.BTree;
 import kapitel_3.vl.ReferenceKey;
 

@@ -1,6 +1,8 @@
 package uebung_2.tests;
 
 import uebung_2.ue.SList;
+import uebung_2.ue.TelephonebookEntry;
+import uebung_2.ue.TelephonebookEntryKey;
 import kapitel_3.tests.Student;
 import kapitel_3.tests.StudentKeys;
 import kapitel_3.vl.IFIterator;

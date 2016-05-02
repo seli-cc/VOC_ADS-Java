@@ -93,16 +93,11 @@ public class SearchTree extends BTree {
 		}									  // Then remove this node for real
 	}
 	
-	public boolean remove(IKey key) {            // Remove a data set assoc. with a key
-		Node toRemove = binarySearch(root, key); // Search for the controlling node
-		remove(toRemove);                        // Remove the controlling node
-		
-		return toRemove != null;
-	}
-	
 	public boolean remove(Object data) {           // Remove a data set
 	    ReferenceKey key = new ReferenceKey(data); // Create a ReferenceKey
+	    Node toRemove = binarySearch(root, key);   // Search for the controlling node
+	    remove(toRemove);                          // Remove the controlling node
 	    
-		return remove(key);
+		return toRemove != null;
 	}
 }

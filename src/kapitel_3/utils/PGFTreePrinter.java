@@ -26,33 +26,14 @@ public class PGFTreePrinter {
     private String defaultChildrenFormat = "";
     private String defaultChildFormat = "";
     private String defaultEdgeFromParentFormat = "";
-
     
-    public PGFTreePrinter(BTree bTree) {
-        this.bTree = bTree;
+    private INodeToData nodeToData = new INodeToData() {
         
-        try {
-            treeClass = Class.forName("kapitel_3.vl.BTree");
-            nodeClass = Class.forName("kapitel_3.vl.BTree$Node");
-            
-            rootField = treeClass.getDeclaredField("root");
-            rootField.setAccessible(true);
-            
-            leftField = nodeClass.getDeclaredField("left");
-            leftField.setAccessible(true);
-
-            rightField = nodeClass.getDeclaredField("right");
-            rightField.setAccessible(true);
-
-            dataField = nodeClass.getDeclaredField("data");
-            dataField.setAccessible(true);
-
-            parentField = nodeClass.getDeclaredField("parent");
-            parentField.setAccessible(true);
-        } catch (ClassNotFoundException | NoSuchFieldException | SecurityException e) {
-            e.printStackTrace();
+        @Override
+        public Object get(Object node) throws IllegalArgumentException, IllegalAccessException {
+            return dataField.get(node);
         }
-    }
+    };
 
     private static final String tikzHeader = "% copy verbatim into a fragile frame\n"
             + "% or \\input this code as pgf-file\n"
@@ -93,7 +74,7 @@ public class PGFTreePrinter {
             + "        },\n"
             + "        level distance=0.75cm,\n"
             + "        level/.style={\n"
-            + "            sibling distance=3cm/(2^(#1-1))\n"
+            + "            sibling distance=4cm/(2^(#1-1))\n"
             + "        },\n"
             + "        edge from parent/.style={\n" 
             + "            draw,\n"
@@ -170,6 +151,46 @@ public class PGFTreePrinter {
         public void delete() {
             formatList.remove(this);
         }
+    }
+
+    private class NodeToData implements INodeToData {
+        public Object get(Object node) throws IllegalArgumentException, IllegalAccessException {
+            return dataField.get(node);
+        }
+    }
+    
+    public PGFTreePrinter(BTree bTree) {
+        this.bTree = bTree;
+        
+        try {
+            treeClass = Class.forName("kapitel_3.vl.BTree");
+            nodeClass = Class.forName("kapitel_3.vl.BTree$Node");
+            
+            rootField = treeClass.getDeclaredField("root");
+            rootField.setAccessible(true);
+            
+            leftField = nodeClass.getDeclaredField("left");
+            leftField.setAccessible(true);
+
+            rightField = nodeClass.getDeclaredField("right");
+            rightField.setAccessible(true);
+
+            dataField = nodeClass.getDeclaredField("data");
+            dataField.setAccessible(true);
+
+            parentField = nodeClass.getDeclaredField("parent");
+            parentField.setAccessible(true);
+        } catch (ClassNotFoundException | NoSuchFieldException | SecurityException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public INodeToData setNodeToData(INodeToData nodeToData) {
+        INodeToData oldNodeToData = this.nodeToData;
+        
+        this.nodeToData = nodeToData;
+        
+        return oldNodeToData;
     }
     
     public PGFTreePrinter setSubTreeFormat(String format) {
@@ -303,7 +324,7 @@ public class PGFTreePrinter {
             pgfTree = (!childFormat.equals("") ? childFormat + " " : "") + "{\n" 
                             + (!subTreeFormat.equals("") ? tabs + "    " + subTreeFormat + "\n" : "")
                             + tabs + "    node" + (!nodeFormat.equals("") ? " " + nodeFormat : "") 
-                            + " (" + dataField.get(node) + ") {" + dataField.get(node) + "}\n"
+                            + " (" + nodeToData.get(node) + ") {" + nodeToData.get(node) + "}\n"
                             + (!childrenFormat.equals("") ? tabs + "    " + childrenFormat + "\n" : "");
             
             if (!pgfLeftSubTree.equals("[missing]") || !pgfRightSubTree.equals("[missing]")) {

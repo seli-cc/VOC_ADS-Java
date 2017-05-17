@@ -3,6 +3,7 @@ package kapitel_3.tests;
 import java.util.Random;
 
 import kapitel_3.vl.IComparator;
+import kapitel_3.vl.IFIterator;
 import kapitel_3.vl.SearchTree;
 
 public class TestSearchTree {
@@ -11,7 +12,7 @@ public class TestSearchTree {
 
         SearchTree searchTree = new SearchTree(integerComparator);
 
-        final int MAX = 20000;
+        final int MAX = 10000;
 
         Random rand = new Random();
         for (int i = 0; i < MAX; i++) {
@@ -23,5 +24,20 @@ public class TestSearchTree {
         }
 
         System.out.println();
+        
+        Object toRemove = null;
+        int counter = 0;
+        do {
+            IFIterator it = searchTree.iterator();
+            toRemove = null;
+            if (it.hasNext()) {
+                toRemove = it.next();
+                counter++;
+                System.out.println("Removing Nr " + counter + ": " + toRemove);
+                searchTree.remove(toRemove);
+            }
+        } while(toRemove != null);
+        
+        
     }
 }

@@ -1,11 +1,11 @@
-package kapitel_3.utils;
+package vl.chapter03.utils;
 
 import java.lang.reflect.Field;
 import java.util.Random;
 
-import kapitel_3.tests.IntegerComparator;
-import kapitel_3.tests.IntegerKey;
-import kapitel_3.work.experiments.AVLTree;
+import vl.chapter03.AVLTree;
+import vl.chapter03.tests.IntegerComparator;
+import vl.chapter03.tests.IntegerKey;
 
 class CommonFormat extends ACommonFormat {
     private Class<?> nodeClass = null;

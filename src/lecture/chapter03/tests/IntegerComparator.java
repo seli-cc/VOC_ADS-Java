@@ -8,13 +8,7 @@ public class IntegerComparator implements IComparator {
         int int1 = (Integer) data1;
         int int2 = (Integer) data2;
         
-        if (int1 < int2) {
-            return -1;
-        } else if (int1 == int2) {
-            return 0;
-        } else { 
-            return 1;
-        }
+        return int1 - int2;
     }
 
     public int compare(Object data, IKey key) {

@@ -10,18 +10,13 @@ public class SearchTree extends BTree {
     protected Node insert(Node current, Node newNode) { // Insert a data set
         if (current == null) { // If a sub-tree is empty
             current = newNode; // the new node becomes the new sub-tree
-        } else {
-            switch (comparator.compare(current.data, newNode.data)) { // Where to insert?
-            case 1:                                           // Insert on the left
-                current.left = insert(current.left, newNode); // The new node becomes the
-                current.left.parent = current; // left sub-tree of current and current in
-                break;                         // turn becomes the parent of the new node
-            case 0: case -1:                                    // Insert at the right
-                current.right = insert(current.right, newNode); // The new node becomes the
-                current.right.parent = current; // right sub-tree of current and current in
-                break;                          // turn becomes the parent of the new node
-            }
-        }
+        } else if (comparator.compare(current.data, newNode.data) > 0) { // Where to insert? Insert on the left
+            current.left = insert(current.left, newNode); // The new node becomes the
+            current.left.parent = current; // left sub-tree of current and current in
+        } else {                                   // Insert at the right
+            current.right = insert(current.right, newNode); // The new node becomes the
+            current.right.parent = current; // right sub-tree of current and current in
+        }                         // turn becomes the parent of the new node
         return current; // Return the sub-tree
     }
     
@@ -35,15 +30,10 @@ public class SearchTree extends BTree {
         if (current != null) { // If the sub-tree is not empty
             if (key.matches(current.data)) { // Look at the root of this sup-tree. Does it
                 found = current;             // contain the requested data set?
-            } else {                         // No? Try to find it in an sub-tree
-                switch (comparator.compare(current.data, key)) { // Where to search?
-                case 1:                                 // Search on the left
-                    found = binarySearch(current.left, key);  // Search to the left
-                    break;
-                case 0: case -1:                        // Search on the right
-                    found = binarySearch(current.right, key); // Search to the right
-                    break;
-                }
+            } else if (comparator.compare(current.data, key) > 0) {                             // Search on the left
+                found = binarySearch(current.left, key);  // Search to the left
+            } else {                      // Search on the right
+                found = binarySearch(current.right, key);
             }
         }
         return found; // Return either null or the reference to the requested data set

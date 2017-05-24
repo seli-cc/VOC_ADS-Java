@@ -15,7 +15,7 @@ public abstract class Heap<T> extends BTree<T> {
     
     private void upHeap(Node<T> node) {
         if (node.parent != null) {
-            if (cs * comparator.compare(node.parent.data, node.data) == +1) {
+            if (cs * comparator.compare(node.parent.data, node.data) > 0) {
                 T tmpData = node.parent.data;
                 node.parent.data = node.data;
                 node.data = tmpData;
@@ -74,12 +74,11 @@ public abstract class Heap<T> extends BTree<T> {
         Node<T> exchangeChild = node.left;
         
         if (exchangeChild == null || node.right != null 
-                && cs * comparator.compare(exchangeChild.data, node.right.data) 
-                        == +1) {
+                && cs * comparator.compare(exchangeChild.data, node.right.data) > 0) {
             exchangeChild = node.right;
         }
         if (exchangeChild != null 
-                && cs * comparator.compare(node.data, exchangeChild.data) == +1) {
+                && cs * comparator.compare(node.data, exchangeChild.data) > 0) {
             exchangeDatasets(node, exchangeChild);
             downHeap(exchangeChild);
         }
@@ -113,7 +112,7 @@ public abstract class Heap<T> extends BTree<T> {
             if (lastButOne != null) {
                 T data = toRemove.data;
                 toRemove.data = lastNode.data;
-                if (cs * comparator.compare(data, toRemove.data) == +1) {
+                if (cs * comparator.compare(data, toRemove.data) > 0) {
                     upHeap(toRemove);
                 } else {
                     downHeap(toRemove);
